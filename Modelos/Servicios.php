@@ -2,7 +2,7 @@
 require_once 'Database.php';
 
 class Servicios {
-    private $db;
+    public $db;
 
     public function __construct($db) {
         $this->db = DataBase::conectar();

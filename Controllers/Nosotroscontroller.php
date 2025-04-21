@@ -1,5 +1,5 @@
 <?php
-require_once '../Modelos/Nosotros.php';
+require_once './Modelos/Nosotros.php';
 
 class NosotrosController {
     private $nosotrosModel;

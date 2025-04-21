@@ -1,5 +1,5 @@
 <?php
-require_once '../Modelos/Ciudades.php';
+require_once './Modelos/Ciudades.php';
 
 class CiudadesController {
     private $ciudadesModel;

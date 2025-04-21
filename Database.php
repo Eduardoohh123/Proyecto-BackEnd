@@ -1,6 +1,6 @@
 <?php
-class DataBase{}
-private static $conexion = null;
+class Database{
+public static $conexion = null;
 public static function conectar(){
     if (self::$conexion == null) {
         try {
@@ -16,18 +16,8 @@ public static function conectar(){
         }
     }
     return self::$conexion;
+
+
 }
-
-function probarConexion(){
-    try{
-        $conexion = null;
-       $conexion = new PDO('mysql:host=localhost;dbname=proyecto_backend', 'root', '');
-       $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-       echo "Conexión exitosa a la base de datos.";
-       } catch (PDOException $e) {
-          die("Error de conexión: " . $e->getMessage());
-       }
-       return self::$conexion;
-
 }
 ?>

@@ -1,15 +1,20 @@
 <?php
 require_once './Modelos/Servicios.php';
 
-class ServiciosController{
-    
-    public function listar(){
-        $servicios = new Servicios();
-        echo json_encode($servicios->getServicios());
+class ServiciosController {
+    private $db;
+
+    public function __construct($db) {
+        $this->db = $db;
     }
 
-    public function crear(){
-        $servicios = new Servicios();
+    public function listar() {
+        $servicios = new Servicios($this->db);
+        echo json_encode($servicios->obtenerTodos());
+    }
+
+    public function crear() {
+        $servicios = new Servicios($this->db);
         $data = json_decode(file_get_contents("php://input"), true);
 
         if (isset($data['Nombre'], $data['Costo'], $data['Duracion'], $data['Descripcion'], $data['Tipo'], $data['Min_integrantes'], $data['Max_integrantes'])) {
@@ -34,8 +39,8 @@ class ServiciosController{
         }
     }
 
-    public function actualizar(){
-        $servicios = new Servicios();
+    public function actualizar() {
+        $servicios = new Servicios($this->db);
         $data = json_decode(file_get_contents("php://input"), true);
 
         if (isset($data['id'], $data['Nombre'], $data['Costo'], $data['Duracion'], $data['Descripcion'], $data['Tipo'], $data['Min_integrantes'], $data['Max_integrantes'])) {
@@ -61,9 +66,9 @@ class ServiciosController{
         }
     }
 
-    public function eliminar(){
+    public function eliminar() {
         $data = json_decode(file_get_contents("php://input"), true);
-        $servicios = new Servicios();
+        $servicios = new Servicios($this->db);
 
         if (isset($data['id'])) {
             $query = "DELETE FROM Servicios WHERE id = :id";
